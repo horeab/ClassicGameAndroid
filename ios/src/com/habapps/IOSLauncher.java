@@ -28,7 +28,7 @@ public class IOSLauncher extends IOSApplication.Delegate {
 
     private boolean adsInitialized = false;
 
-    private GameProperties gameProperties = GameProperties.skelgame;
+    private GameProperties gameProperties = GameProperties.mathgame;
 
     private GADBannerView bannerAdview;
     private GADInterstitial interstitialAd;

@@ -8,14 +8,25 @@ public enum GameProperties {
 
     skelgame(
             GameIdEnum.skelgame,
-            NSBundle.getMainBundle().getLocalizedString("language","en","InfoPlist"),
-            NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName","en","InfoPlist"),
+            NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
+            NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName", "en", "InfoPlist"),
             "appId",
             "bannerId",
             "interId",
             "rewardId",
             "iosAppstoreId",
-            "proVersionStoreAppId");
+            "proVersionStoreAppId"),
+
+    mathgame(
+            GameIdEnum.math,
+            NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
+            NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName", "en", "InfoPlist"),
+            "ca-app-pub-9432399956064043~7951976554",
+            "ca-app-pub-9432399956064043/5122084493",
+            "ca-app-pub-9432399956064043/8802023793",
+            "ca-app-pub-9432399956064043/5325813217",
+            "1492916371",
+            "1492916371");
 
     private GameIdEnum gameIdEnum;
     private String language;

@@ -11,11 +11,11 @@ android {
             res.srcDirs = ['res']
             jniLibs.srcDirs = ['libs']
         }
-        skelgame {
-            assets.srcDirs = ['assets/tournament_resources/implementations/skelgame', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        mathgame {
+            assets.srcDirs = ['assets/tournament_resources/implementations/math', 'assets/tournament_resources/main', 'assets/main_resources/main']
         }
-        skelgamePro {
-            assets.srcDirs = ['assets/tournament_resources/implementations/skelgame', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        mathgamePro {
+            assets.srcDirs = ['assets/tournament_resources/implementations/math', 'assets/tournament_resources/main', 'assets/main_resources/main']
         }
     }
     lintOptions {
@@ -54,20 +54,20 @@ android {
     flavorDimensions "game"
     productFlavors {
 /////////////////////////////////////////////////////////////////////////////
-        skelgame {
-            applicationIdSuffix ".skelgame"
+        mathgame {
+            applicationIdSuffix ".mathgame"
             versionCode 1
             versionName "1.00"
             dimension "game"
-            manifestPlaceholders = [appIcon: "@drawable/skelgame_icon"]
+            manifestPlaceholders = [appIcon: "@drawable/mathgame_icon"]
         }
 /////////////////////////////////////////////////////////////////////////////
-        skelgamePro {
-            applicationIdSuffix ".skelgamepro"
+        mathgamePro {
+            applicationIdSuffix ".mathgamepro"
             versionCode 1
             versionName "1.00"
             dimension "game"
-            manifestPlaceholders = [appIcon: "@drawable/skelgamepro_icon"]
+            manifestPlaceholders = [appIcon: "@drawable/mathgamepro_icon"]
         }
 /////////////////////////////////////////////////////////////////////////////
     }
