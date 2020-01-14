@@ -2,12 +2,13 @@ package com.habapps;
 
 import org.robovm.apple.foundation.NSBundle;
 
-import libgdx.constants.GameIdEnum;
+import libgdx.implementations.GameIdEnum;
+
 
 public enum GameProperties {
 
     skelgame(
-            GameIdEnum.skelgame,
+            GameIdEnum.math,
             NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
             NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName", "en", "InfoPlist"),
             "appId",
@@ -17,6 +18,17 @@ public enum GameProperties {
             "iosAppstoreId",
             "proVersionStoreAppId"),
 
+    balloon(
+            GameIdEnum.balloon,
+            NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
+            NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName", "en", "InfoPlist"),
+            "ca-app-pub-9432399956064043~8883910119",
+            "ca-app-pub-9432399956064043/7570828446",
+            "ca-app-pub-9432399956064043/7207866360",
+            "ca-app-pub-9432399956064043/2318501760",
+            "1482271246",
+            "1482271246"),
+
     mathgame(
             GameIdEnum.math,
             NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
@@ -25,8 +37,8 @@ public enum GameProperties {
             "ca-app-pub-9432399956064043/5122084493",
             "ca-app-pub-9432399956064043/8802023793",
             "ca-app-pub-9432399956064043/5325813217",
-            "1492916371",
-            "1492916371");
+            "1492916413",
+            "1492916413");
 
     private GameIdEnum gameIdEnum;
     private String language;

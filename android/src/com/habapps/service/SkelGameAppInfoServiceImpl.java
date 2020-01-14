@@ -20,8 +20,12 @@ public class SkelGameAppInfoServiceImpl implements AppInfoService {
     }
 
     @Override
+    public void removeAds() {
+    }
+
+    @Override
     public boolean isPortraitMode() {
-        return true;
+        return false;
     }
     @Override
     public float gameScreenTopMargin() {
@@ -58,10 +62,6 @@ public class SkelGameAppInfoServiceImpl implements AppInfoService {
         return false;
     }
 
-    @Override
-    public boolean googleFacebookLoginEnabled() {
-        return activity.getResources().getBoolean(R.bool.google_facebook_login_enabled);
-    }
 
     @Override
     public String getImplementationGameResourcesFolder() {

@@ -20,8 +20,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.habapps.service.SkelGameAppInfoServiceImpl;
 
 import libgdx.game.Game;
-import libgdx.utils.startgame.test.DefaultBillingService;
-import libgdx.utils.startgame.test.DefaultFacebookService;
+import libgdx.implementations.balloon.BalloonGame;
+import libgdx.utils.startgame.test.DefaultPurchaseManager;
 
 public class AndroidLauncher extends AndroidApplication {
 
@@ -30,6 +30,8 @@ public class AndroidLauncher extends AndroidApplication {
     private SkelGameAppInfoServiceImpl appInfoService;
 
     private InterstitialAd interstitialAd;
+
+    private BalloonGame game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class AndroidLauncher extends AndroidApplication {
         appInfoService = new SkelGameAppInfoServiceImpl(this);
     }
 
+
     private void initAds(AdView bannerAdview) {
         MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
 
@@ -74,11 +77,11 @@ public class AndroidLauncher extends AndroidApplication {
 
 
     private View createGameView() {
+        game = new BalloonGame(
+                appInfoService);
+        game.purchaseManager= new DefaultPurchaseManager();
         return initializeForView(
-                new SkelGame(
-                        new DefaultFacebookService(),
-                        new DefaultBillingService(),
-                        appInfoService),
+                game,
                 new AndroidApplicationConfiguration());
     }
 

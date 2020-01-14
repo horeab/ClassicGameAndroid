@@ -14,7 +14,7 @@ public class SkelGameAppInfoServiceImpl implements AppInfoService {
     }
     @Override
     public boolean isPortraitMode() {
-        return true;
+        return false;
     }
 
 
@@ -29,8 +29,13 @@ public class SkelGameAppInfoServiceImpl implements AppInfoService {
     }
 
     @Override
+    public void removeAds() {
+        iosLauncher.removeAds();
+    }
+
+    @Override
     public boolean isProVersion() {
-        return false;
+        return true;
     }
 
     @Override
@@ -60,11 +65,6 @@ public class SkelGameAppInfoServiceImpl implements AppInfoService {
 
     @Override
     public boolean isScreenShotMode() {
-        return false;
-    }
-
-    @Override
-    public boolean googleFacebookLoginEnabled() {
         return false;
     }
 

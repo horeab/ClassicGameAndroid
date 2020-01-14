@@ -17,6 +17,12 @@ android {
         mathgamePro {
             assets.srcDirs = ['assets/tournament_resources/implementations/math', 'assets/tournament_resources/main', 'assets/main_resources/main']
         }
+        balloon {
+            assets.srcDirs = ['assets/tournament_resources/implementations/balloon', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        }
+        balloonPro {
+            assets.srcDirs = ['assets/tournament_resources/implementations/balloon', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        }
     }
     lintOptions {
         checkReleaseBuilds false
@@ -68,6 +74,22 @@ android {
             versionName "1.00"
             dimension "game"
             manifestPlaceholders = [appIcon: "@drawable/mathgamepro_icon"]
+        }
+/////////////////////////////////////////////////////////////////////////////
+        balloon {
+            applicationIdSuffix ".balloon"
+            versionCode 1
+            versionName "1.00"
+            dimension "game"
+            manifestPlaceholders = [appIcon: "@drawable/balloon_icon"]
+        }
+/////////////////////////////////////////////////////////////////////////////
+        balloonPro {
+            applicationIdSuffix ".balloonpro"
+            versionCode 1
+            versionName "1.00"
+            dimension "game"
+            manifestPlaceholders = [appIcon: "@drawable/balloonpro_icon"]
         }
 /////////////////////////////////////////////////////////////////////////////
     }
