@@ -15,17 +15,18 @@ public class SkelGameAppInfoServiceImpl implements AppInfoService {
     }
 
     @Override
+    public void removeAds() {
+        activity.removeAds();
+    }
+
+    @Override
     public String getGameIdPrefix() {
         return activity.getResources().getString(R.string.game_id);
     }
 
     @Override
-    public void removeAds() {
-    }
-
-    @Override
     public boolean isPortraitMode() {
-        return false;
+        return true;
     }
     @Override
     public float gameScreenTopMargin() {
@@ -61,7 +62,6 @@ public class SkelGameAppInfoServiceImpl implements AppInfoService {
     public boolean isScreenShotMode() {
         return false;
     }
-
 
     @Override
     public String getImplementationGameResourcesFolder() {

@@ -4,18 +4,9 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import libgdx.constants.Contrast;
-import libgdx.transactions.TransactionAmount;
 import libgdx.controls.label.MyLabel;
 import libgdx.controls.labelimage.InventoryTableBuilder;
 import libgdx.controls.labelimage.LabelImage;
@@ -24,7 +15,14 @@ import libgdx.game.Game;
 import libgdx.resources.FontManager;
 import libgdx.resources.Res;
 import libgdx.resources.dimen.MainDimen;
+import libgdx.transactions.TransactionAmount;
 import libgdx.utils.model.FontColor;
+import libgdx.utils.model.FontConfig;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class ButtonBuilder {
 
@@ -43,6 +41,9 @@ public class ButtonBuilder {
     private String buttonName;
     private boolean disabled;
     private Contrast contrast = Contrast.LIGHT;
+    protected Float fontScale;
+    protected FontColor fontColor;
+    private FontConfig fontConfig;
 
     public ButtonBuilder() {
     }
@@ -60,7 +61,11 @@ public class ButtonBuilder {
     }
 
     protected LabelImage createTextTable(String text, float tableWidth, float fontScale) {
-        return new LabelImage(new LabelImageConfigBuilder().setWrappedLineLabel(tableWidth).setFontScale(fontScale).setText(text).build());
+        LabelImageConfigBuilder labelImageConfigBuilder = new LabelImageConfigBuilder().setFontConfig(fontConfig).setWrappedLineLabel(tableWidth).setFontScale(fontScale).setText(text);
+        if (fontColor != null) {
+            labelImageConfigBuilder.setTextColor(fontColor);
+        }
+        return new LabelImage(labelImageConfigBuilder.build());
     }
 
     public ButtonBuilder setSingleLineText(String text, float fontScale) {
@@ -71,13 +76,17 @@ public class ButtonBuilder {
 
 
     public ButtonBuilder setWrappedText(LabelImageConfigBuilder labelImageConfigBuilder) {
+        if (fontColor != null) {
+            labelImageConfigBuilder.setTextColor(fontColor);
+        }
         LabelImage labelImage = new LabelImage(labelImageConfigBuilder.build());
         addCenterTextImageColumn(labelImage);
         return this;
     }
 
     public ButtonBuilder setWrappedText(String text, float width) {
-        return setWrappedText(new LabelImageConfigBuilder().setText(text).setFontScale(Game.getInstance().getAppInfoService().isPortraitMode() ? FontManager.getNormalBigFontDim() : FontManager.getBigFontDim()).setWrappedLineLabel(width));
+        float fontScale = this.fontScale != null ? this.fontScale : Game.getInstance().getAppInfoService().isPortraitMode() ? FontManager.getNormalFontDim() : FontManager.getBigFontDim();
+        return setWrappedText(new LabelImageConfigBuilder().setText(text).setFontScale(fontScale).setWrappedLineLabel(width));
     }
 
     public ButtonBuilder setContrast(Contrast contrast) {
@@ -86,7 +95,26 @@ public class ButtonBuilder {
     }
 
     public ButtonBuilder setText(String text) {
-        centerTextImageColumnLabelImage = createTextTable(text, FontManager.getNormalFontDim());
+        float fontDim = FontManager.getNormalFontDim();
+        if (fontScale != null) {
+            fontDim = fontScale;
+        }
+        centerTextImageColumnLabelImage = createTextTable(text, fontDim);
+        return this;
+    }
+
+    public ButtonBuilder setFontScale(Float fontScale) {
+        this.fontScale = fontScale;
+        return this;
+    }
+
+    public ButtonBuilder setFontColor(FontColor fontColor) {
+        this.fontColor = fontColor;
+        return this;
+    }
+
+    public ButtonBuilder setFontConfig(FontConfig fontConfig) {
+        this.fontConfig = fontConfig;
         return this;
     }
 

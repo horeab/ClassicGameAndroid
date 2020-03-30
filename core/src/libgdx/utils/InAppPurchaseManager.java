@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import libgdx.controls.button.ButtonBuilder;
+import libgdx.controls.button.MainButtonSize;
 import libgdx.controls.button.MyButton;
 import libgdx.controls.popup.InAppPurchasesPopup;
 import libgdx.controls.popup.notificationpopup.MyNotificationPopupConfigBuilder;
@@ -49,16 +50,16 @@ public class InAppPurchaseManager {
     }
 
     public void displayInAppPurchasesPopup(String text) {
-        displayInAppPurchasesPopup(text, new Runnable() {
-            @Override
-            public void run() {
-                executeDefaultRedirectScreen();
-            }
-        });
+        displayInAppPurchasesPopup(text, defaultRedirectScreenRunnable());
     }
 
-    private void executeDefaultRedirectScreen() {
-        Game.getInstance().getScreenManager().showMainScreen();
+    public static Runnable defaultRedirectScreenRunnable() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                Game.getInstance().getScreenManager().showMainScreen();
+            }
+        };
     }
 
     public void displayInAppPurchasesPopup(String text, Runnable executeAfterBought) {
@@ -77,11 +78,14 @@ public class InAppPurchaseManager {
 
     private void initButtons() {
         ButtonBuilder buyButtonBuilder = new ButtonBuilder()
-//                .setFixedButtonSize(MainButtonSize.TWO_ROW_BUTTON_SIZE)
                 .setDefaultButton();
-
         ButtonBuilder restoreButtonBuilder = new ButtonBuilder()
                 .setDefaultButton();
+        if (!Game.getInstance().getAppInfoService().isPortraitMode()) {
+            buyButtonBuilder.setFixedButtonSize(MainButtonSize.TWO_ROW_BUTTON_SIZE);
+            restoreButtonBuilder.setFixedButtonSize(MainButtonSize.TWO_ROW_BUTTON_SIZE);
+        }
+
 
         if (skuInfo == null || skuInfo.equals(Information.UNAVAILABLE)) {
             restoreButtonBuilder.setDisabled(true);
@@ -146,7 +150,7 @@ public class InAppPurchaseManager {
                 if (executeAfterBought != null) {
                     executeAfterBought.run();
                 } else {
-                    executeDefaultRedirectScreen();
+                    defaultRedirectScreenRunnable().run();
                 }
             }
         }));

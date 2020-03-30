@@ -18,6 +18,28 @@ public enum GameProperties {
             "iosAppstoreId",
             "proVersionStoreAppId"),
 
+
+    resourcewars(
+            GameIdEnum.resourcewars,
+            NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
+            NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName", "en", "InfoPlist"),
+            "appId",
+            "bannerId",
+            "interId",
+            "rewardId",
+            "1503908042",
+            "1503908135"),
+
+    memory(
+            GameIdEnum.memory,
+            NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
+            NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName", "en", "InfoPlist"),
+            "ca-app-pub-9432399956064043~5019092773",
+            "ca-app-pub-9432399956064043/1079847764",
+            "ca-app-pub-9432399956064043/8032268922",
+            "ca-app-pub-9432399956064043/7453684421",
+            "1486415332",
+            "1486415276"),
     balloon(
             GameIdEnum.balloon,
             NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),

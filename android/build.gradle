@@ -23,6 +23,12 @@ android {
         balloonPro {
             assets.srcDirs = ['assets/tournament_resources/implementations/balloon', 'assets/tournament_resources/main', 'assets/main_resources/main']
         }
+        memory {
+            assets.srcDirs = ['assets/tournament_resources/implementations/memory', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        }
+        memoryPro {
+            assets.srcDirs = ['assets/tournament_resources/implementations/memory', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        }
     }
     lintOptions {
         checkReleaseBuilds false
@@ -44,7 +50,7 @@ android {
     }
     defaultConfig {
         applicationId "com.habapps"
-        minSdkVersion 19
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -92,7 +98,23 @@ android {
             manifestPlaceholders = [appIcon: "@drawable/balloonpro_icon"]
         }
 /////////////////////////////////////////////////////////////////////////////
+        memory {
+            applicationIdSuffix ".memory"
+            versionCode 1
+            versionName "1.00"
+            dimension "game"
+            manifestPlaceholders = [appIcon: "@drawable/memory_icon"]
+        }
+/////////////////////////////////////////////////////////////////////////////
+        memoryPro {
+            applicationIdSuffix ".memorypro"
+            versionCode 1
+            versionName "1.00"
+            dimension "game"
+            manifestPlaceholders = [appIcon: "@drawable/memorypro_icon"]
+        }
     }
+/////////////////////////////////////////////////////////////////////////////
 
 }
 
@@ -164,8 +186,8 @@ eclipse {
     }
 
     jdt {
-        sourceCompatibility = 1.7
-        targetCompatibility = 1.7
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
     classpath {

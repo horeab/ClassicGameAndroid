@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.badlogic.gdx.pay.android.googlebilling.PurchaseManagerGoogleBilling;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -20,18 +21,18 @@ import com.google.android.gms.ads.MobileAds;
 import com.habapps.service.SkelGameAppInfoServiceImpl;
 
 import libgdx.game.Game;
-import libgdx.implementations.balloon.BalloonGame;
-import libgdx.utils.startgame.test.DefaultPurchaseManager;
+import libgdx.implementations.memory.MemoryGame;
+import libgdx.utils.Utils;
 
 public class AndroidLauncher extends AndroidApplication {
 
     public static final int ID_AD_BANNER = 1111;
 
     private SkelGameAppInfoServiceImpl appInfoService;
+    private MemoryGame game;
+    private AdView bannerAdview;
 
     private InterstitialAd interstitialAd;
-
-    private BalloonGame game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +47,25 @@ public class AndroidLauncher extends AndroidApplication {
         allScreenView.setOrientation(LinearLayout.VERTICAL);
         int libgdxAdviewHeight = getResources().getDimensionPixelOffset(R.dimen.libgdx_adview_height);
         ViewGroup.LayoutParams adParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, libgdxAdviewHeight);
-        AdView bannerAdview = new AdView(this);
-        allScreenView.addView(bannerAdview, adParams);
-        allScreenView.addView(createGameView());
+        View gameView = createGameView();
+        bannerAdview = new AdView(this);
+        if (!Utils.isValidExtraContent()) {
+            allScreenView.addView(bannerAdview, adParams);
+        }
+        allScreenView.addView(gameView);
         setContentView(allScreenView);
+        initAds(bannerAdview);
+    }
 
-        if (!appInfoService.isProVersion()) {
-            initAds(bannerAdview);
+    public void removeAds() {
+        if (bannerAdview != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((ViewGroup) bannerAdview.getParent()).removeView(bannerAdview);
+                    bannerAdview = null;
+                }
+            });
         }
     }
 
@@ -60,7 +73,6 @@ public class AndroidLauncher extends AndroidApplication {
         handler = new Handler(getMainLooper());
         appInfoService = new SkelGameAppInfoServiceImpl(this);
     }
-
 
     private void initAds(AdView bannerAdview) {
         MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
@@ -77,11 +89,21 @@ public class AndroidLauncher extends AndroidApplication {
 
 
     private View createGameView() {
-        game = new BalloonGame(
-                appInfoService);
-        game.purchaseManager= new DefaultPurchaseManager();
+        game = new MemoryGame(appInfoService);
+//        game.purchaseManager = new DefaultPurchaseManager();
+        game.purchaseManager = new PurchaseManagerGoogleBilling(this);
         return initializeForView(
+                //////////////////////////
+                //////////////////////////
+                //////////////////////////
+                //////////////////////////
+                //////////////////////////
                 game,
+                //////////////////////////
+                //////////////////////////
+                //////////////////////////
+                //////////////////////////
+                //////////////////////////
                 new AndroidApplicationConfiguration());
     }
 
@@ -95,7 +117,7 @@ public class AndroidLauncher extends AndroidApplication {
 
 
     public void showPopupAd(final Runnable afterClose) {
-        if (!appInfoService.isProVersion()) {
+        if (!Utils.isValidExtraContent()) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
