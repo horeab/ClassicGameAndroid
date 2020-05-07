@@ -22,6 +22,7 @@ import com.habapps.service.SkelGameAppInfoServiceImpl;
 
 import libgdx.game.Game;
 import libgdx.implementations.memory.MemoryGame;
+import libgdx.implementations.resourcewars.ResourceWarsGame;
 import libgdx.utils.Utils;
 
 public class AndroidLauncher extends AndroidApplication {
@@ -29,7 +30,7 @@ public class AndroidLauncher extends AndroidApplication {
     public static final int ID_AD_BANNER = 1111;
 
     private SkelGameAppInfoServiceImpl appInfoService;
-    private MemoryGame game;
+    private ResourceWarsGame game;
     private AdView bannerAdview;
 
     private InterstitialAd interstitialAd;
@@ -89,7 +90,7 @@ public class AndroidLauncher extends AndroidApplication {
 
 
     private View createGameView() {
-        game = new MemoryGame(appInfoService);
+        game = new ResourceWarsGame(appInfoService);
 //        game.purchaseManager = new DefaultPurchaseManager();
         game.purchaseManager = new PurchaseManagerGoogleBilling(this);
         return initializeForView(

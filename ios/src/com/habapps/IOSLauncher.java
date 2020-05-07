@@ -21,7 +21,8 @@ import org.robovm.pods.google.mobileads.GADInterstitialDelegateAdapter;
 import org.robovm.pods.google.mobileads.GADRequest;
 import org.robovm.pods.google.mobileads.GADRequestError;
 
-import libgdx.implementations.balloon.BalloonGame;
+import libgdx.implementations.memory.MemoryGame;
+import libgdx.implementations.resourcewars.ResourceWarsGame;
 import libgdx.utils.Utils;
 
 public class IOSLauncher extends IOSApplication.Delegate {
@@ -29,8 +30,8 @@ public class IOSLauncher extends IOSApplication.Delegate {
 
     private boolean adsInitialized = false;
 
-    private GameProperties gameProperties = GameProperties.balloon;
-    private BalloonGame game;
+    private GameProperties gameProperties = GameProperties.resourcewars;
+    private ResourceWarsGame game;
 
     private GADBannerView bannerAdview;
     private GADInterstitial interstitialAd;
@@ -43,9 +44,9 @@ public class IOSLauncher extends IOSApplication.Delegate {
     protected IOSApplication createApplication() {
         final IOSApplicationConfiguration config = new IOSApplicationConfiguration();
         appInfoService = new SkelGameAppInfoServiceImpl(this);
-        config.orientationLandscape = !appInfoService.isPortraitMode();;
-        config.orientationPortrait = appInfoService.isPortraitMode();;
-        game = new BalloonGame(
+        config.orientationLandscape = !appInfoService.isPortraitMode();
+        config.orientationPortrait = appInfoService.isPortraitMode();
+        game = new ResourceWarsGame(
                 appInfoService);
         game.purchaseManager = new PurchaseManageriOSApple();
         iosApplication = new IOSApplication(

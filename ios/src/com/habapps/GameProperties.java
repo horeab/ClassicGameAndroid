@@ -23,11 +23,11 @@ public enum GameProperties {
             GameIdEnum.resourcewars,
             NSBundle.getMainBundle().getLocalizedString("language", "en", "InfoPlist"),
             NSBundle.getMainBundle().getLocalizedString("CFBundleDisplayName", "en", "InfoPlist"),
-            "appId",
-            "bannerId",
-            "interId",
-            "rewardId",
-            "1503908042",
+            "ca-app-pub-9432399956064043~9352464730",
+            "ca-app-pub-9432399956064043/3740017735",
+            "ca-app-pub-9432399956064043/2426936061",
+            "ca-app-pub-9432399956064043/4861527718",
+            "1503908135",
             "1503908135"),
 
     memory(

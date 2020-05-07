@@ -57,11 +57,12 @@ public class ButtonBuilder {
     }
 
     protected LabelImage createTextTable(String text, float fontScale) {
-        return createTextTable(text, new GlyphLayout(Game.getInstance().getFontManager().getFont(), text).width, fontScale);
+        return createTextTable(text, new GlyphLayout(Game.getInstance().getFontManager().getFont(contrast), text).width, fontScale);
     }
 
     protected LabelImage createTextTable(String text, float tableWidth, float fontScale) {
-        LabelImageConfigBuilder labelImageConfigBuilder = new LabelImageConfigBuilder().setFontConfig(fontConfig).setWrappedLineLabel(tableWidth).setFontScale(fontScale).setText(text);
+        LabelImageConfigBuilder labelImageConfigBuilder = new LabelImageConfigBuilder().setFontConfig(fontConfig)
+                .setWrappedLineLabel(tableWidth).setFontScale(fontScale).setText(text);
         if (fontColor != null) {
             labelImageConfigBuilder.setTextColor(fontColor);
         }
@@ -86,7 +87,11 @@ public class ButtonBuilder {
 
     public ButtonBuilder setWrappedText(String text, float width) {
         float fontScale = this.fontScale != null ? this.fontScale : Game.getInstance().getAppInfoService().isPortraitMode() ? FontManager.getNormalFontDim() : FontManager.getBigFontDim();
-        return setWrappedText(new LabelImageConfigBuilder().setText(text).setFontScale(fontScale).setWrappedLineLabel(width));
+        LabelImageConfigBuilder labelImageConfigBuilder = new LabelImageConfigBuilder().setText(text).setFontScale(fontScale).setWrappedLineLabel(width);
+        if (fontColor != null) {
+            labelImageConfigBuilder.setTextColor(fontColor);
+        }
+        return setWrappedText(labelImageConfigBuilder);
     }
 
     public ButtonBuilder setContrast(Contrast contrast) {
@@ -205,7 +210,8 @@ public class ButtonBuilder {
 
     public MyButton build() {
         processButtonTable();
-        MyButton myButton = new MyButton(getButtonSize(), buttonSkin == null ? MainButtonSkin.TRANSPARENT : buttonSkin, contrast);
+        MyButton myButton = new MyButton(getButtonSize(), buttonSkin == null ?
+                MainButtonSkin.TRANSPARENT : buttonSkin, contrast);
         if (StringUtils.isNotBlank(buttonName)) {
             myButton.setName(buttonName);
         }

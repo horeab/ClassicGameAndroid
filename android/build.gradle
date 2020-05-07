@@ -29,6 +29,12 @@ android {
         memoryPro {
             assets.srcDirs = ['assets/tournament_resources/implementations/memory', 'assets/tournament_resources/main', 'assets/main_resources/main']
         }
+        resourcewars {
+            assets.srcDirs = ['assets/tournament_resources/implementations/resourcewars', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        }
+        resourcewarsPro {
+            assets.srcDirs = ['assets/tournament_resources/implementations/resourcewars', 'assets/tournament_resources/main', 'assets/main_resources/main']
+        }
     }
     lintOptions {
         checkReleaseBuilds false
@@ -112,6 +118,22 @@ android {
             versionName "1.00"
             dimension "game"
             manifestPlaceholders = [appIcon: "@drawable/memorypro_icon"]
+        }
+/////////////////////////////////////////////////////////////////////////////
+        resourcewars {
+            applicationIdSuffix ".resourcewars"
+            versionCode 1
+            versionName "1.00"
+            dimension "game"
+            manifestPlaceholders = [appIcon: "@drawable/resourcewars_icon"]
+        }
+/////////////////////////////////////////////////////////////////////////////
+        resourcewarsPro {
+            applicationIdSuffix ".resourcewarspro"
+            versionCode 1
+            versionName "1.00"
+            dimension "game"
+            manifestPlaceholders = [appIcon: "@drawable/resourcewarspro_icon"]
         }
     }
 /////////////////////////////////////////////////////////////////////////////
